@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--
+    -->
+    <script> var DEBUG = true; </script>
+
+    <title>Empty WebView application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="common.css">
+
+    <script type="text/javascript" src="functions.js"></script>
+    <script type="text/javascript" src="debug_welcome.js"></script>
+
+</head>
+<body onload="openTab('Main', 'btnMainTab'); debug();">
+
+    <!-- Debug information frame. Invisible if not enabled -->
+    <div id="vw_debug" class="frame" style="display:none">
+        <span id="w_debug">some debug text (html)</span>
+    </div>
+
+    <!-- Buttons to switch tabs -->
+    <div>
+        <button class="tbtn" id="btnMainTab" onclick="openTab('Main', 'btnMainTab')">Main</button>
+        <button class="tbtn" id="btnSettingsTab" onclick="openTab('Settings', 'btnSettingsTab')">Settings</button>
+    </div>
+
+    <!-- Main tab -->
+    <div id="Main" class="tab" style="display:none">
+        <h3>
+            <span id="w_header">Empty WebView application (html)</span>
+        </h3>
+
+        <!-- About and Help button frame -->
+        <div id="vw_msg" style="display:none" class="frame">
+            <span id="w_msg">Some message (html)</span>
+            <button class="wbtn" id="btnHelp" style="width:100%;outline:0;margin-top:0.5em" onclick="hCallback()">Help</button>
+        </div>
+
+        <!-- "The Button" frame -->
+        <div class="frame">
+            Some button:
+            <button class="wbtn" id="btnFileManager" style="width:100%;outline:0;margin-top:0.5em" onclick="bCallback()">The Button</button>
+        </div>
+    </div><!-- End of Main tab -->
+
+    <!-- Settings tab -->
+    <div id="Settings" class="tab" style="display:none">
+
+        <!-- Settings frame -->
+        <div class="frame">
+            <table>
+                <caption><b>Settings:</b></caption>
+                <tr>
+                    <td>Application language:</td>
+                    <td><span id="s_lang">(html)</span></td>
+                </tr>
+            </table>
+            <div id="wrapper" class="fragment">
+                <button class="wbtn" id="btnSettings" style="width:100%;outline:0;margin-top:0.5em" onclick="sCallback()">Change settings</button>
+            </div>
+        </div>
+    </div> <!-- End of settings tab -->
+
+</body>
+
+</html>
