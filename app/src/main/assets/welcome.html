@@ -9,8 +9,9 @@
     <script type="text/javascript" src="qrcode.min.js"></script>
 
     <script type="text/javascript">
+      console.log('start head script');
     var qrenc;
-    function QR (size='256', dark='#000000', light='#ffffff', cor='L') {
+    function QR (size, dark, light, cor) {
       var cl = QRCode.CorrectLevel.L;
       switch(cor) {
           case 'L':
@@ -39,6 +40,7 @@
       });
     }
     function refresh() {
+          console.log('start refresh()');
           var mSize = document.getElementById('size').value;
           var mDark = document.getElementById('dark').value;
           var mLight = document.getElementById('light').value;
@@ -55,16 +57,20 @@
           );
           qrenc.clear();
           qrenc.makeCode(document.getElementById('qrtext').value);
+                console.log('finish refresh()');
     }
     function setDefault() {
+          console.log('start setDefault()');
           document.getElementById('qrcode').innerHTML='';
           QR('128', '#0000ff', '#00ffff', 'H');
           qrenc.clear();
           qrenc.makeCode(document.getElementById('qrtext').value);
+                console.log('finish setDefault()');
     }
     function checkRGB(color) {
         return color.match(/^\#[0-9A-Fa-f]{3}|^\#[0-9A-Fa-f]{6}/);
     }
+          console.log('finish head script');
     </script>
 
 </head>
@@ -77,8 +83,8 @@
 
 <form><br>  <textarea
       placeholder="Enter text to encode here..."
-      cols="33"
-      rows="5"
+      cols="31"
+      rows="3"
       id="qrtext"
       onkeyup="
         refresh();
@@ -88,6 +94,7 @@
   <button
       type="button"
       onClick="refresh();"
+       console.log('encode button');     
   >
 Encode
   </button>
@@ -106,8 +113,8 @@ Clear
   <input type="number" id="size" size="4" value="256" onkeyup="refresh();" style="width:3em;" />
   <br />
   Color dark/light [#RGB or #RRGGBB]<br />
-  <input type="text" id="dark" size="6" value="#000000" onkeyup="refresh();" />/
-  <input type="text" id="light" size="6" value="#ffffff" onkeyup="refresh();"/>
+  <input type="text" id="dark" size="7" value="#000000" onkeyup="refresh();" />/
+  <input type="text" id="light" size="7" value="#ffffff" onkeyup="refresh();"/>
   <br />
   Correction level
   <select name="correction" id="corr" value="L" onchange="refresh();">
@@ -119,7 +126,7 @@ Clear
 </form>
 
     <script>
-    QR('128', '#0000ff', '#00ffff', 'H');
+    QR('128', '#000000', '#FFFFFF', 'L');
     qrenc.clear();
     qrenc.makeCode('');
     </script>

@@ -11,6 +11,9 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebChromeClient;
+import android.webkit.ConsoleMessage;
+import android.util.Log;
 
 public class MainActivity extends Activity {
     private WebView mainUI_WV;
@@ -28,6 +31,8 @@ public class MainActivity extends Activity {
         //mainUI_WV.addJavascriptInterface(new WebViewJSCallback(this), "Android");
         /* Show external page in browser */
         mainUI_WV.setWebViewClient(new MyWebViewClient());
+        /* Handle JavaScript console log */
+        mainUI_WV.setWebChromeClient(new myWebChromeClient());
 
         /* Enable chome remote debuging for WebView (Ctrl-Shift-I) */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -97,6 +102,43 @@ public class MainActivity extends Activity {
 //            }
             view.clearCache(true);
             view.clearHistory();
+        }
+    }
+    
+    /**
+     * Handle JavaScript console log
+     */
+    private class myWebChromeClient extends WebChromeClient {
+
+        public boolean onConsoleMessage(ConsoleMessage cm) {
+            final String TAG = "lWS.QR";
+            String formattedMessage =
+                cm.message()
+                + " -- From line: "
+                + cm.lineNumber()
+                + " of "
+                + cm.sourceId();
+            switch (cm.messageLevel()) {
+                case DEBUG:
+                    Log.d(TAG, formattedMessage);
+                    break;
+                case ERROR:
+                    Log.e(TAG, formattedMessage);
+                    break;
+                case LOG:
+                    Log.i(TAG, formattedMessage);
+                    break;
+                case TIP:
+                    Log.i(TAG, formattedMessage);
+                    break;
+                case WARNING:
+                    Log.v(TAG, formattedMessage);
+                    break;
+                default:
+                    Log.w(TAG, formattedMessage);
+                    break;
+            }
+            return true;
         }
     }
 }
