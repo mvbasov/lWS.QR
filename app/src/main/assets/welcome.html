@@ -1,69 +1,130 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!--
-    -->
-    <script> var DEBUG = true; </script>
-
-    <title>Empty WebView application</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
     <link rel="stylesheet" type="text/css" href="common.css">
 
-    <script type="text/javascript" src="functions.js"></script>
-    <script type="text/javascript" src="debug_welcome.js"></script>
+    <script type="text/javascript" src="qrcode.min.js"></script>
+
+    <script type="text/javascript">
+    var qrenc;
+    function QR (size='256', dark='#000000', light='#ffffff', cor='L') {
+      var cl = QRCode.CorrectLevel.L;
+      switch(cor) {
+          case 'L':
+                cl=QRCode.CorrectLevel.L
+                break;
+          case 'M':
+                cl=QRCode.CorrectLevel.M
+                break;
+          case 'Q':
+                cl=QRCode.CorrectLevel.Q
+                break;
+          case 'H':
+                cl=QRCode.CorrectLevel.H
+                break;
+          default:
+                cl=QRCode.CorrectLevel.L
+
+      }  
+      qrenc = new QRCode(document.getElementById('qrcode'), {
+          text: '',
+          width: size,
+          height : size,
+          colorDark : dark,
+          colorLight : light,
+          correctLevel : cl
+      });
+    }
+    function refresh() {
+          var mSize = document.getElementById('size').value;
+          var mDark = document.getElementById('dark').value;
+          var mLight = document.getElementById('light').value;
+          var mCorr = document.getElementById('corr').value;
+          if (mSize > 1024 || mSize < 64) mSize = 128;
+          if (!checkRGB(mDark)) mDark = '#000000';
+          if (!checkRGB(mLight)) mLight = '#FFFFFF';
+          document.getElementById('qrcode').innerHTML='';
+          QR(
+            mSize,
+            mDark,
+            mLight,
+            document.getElementById('corr').value
+          );
+          qrenc.clear();
+          qrenc.makeCode(document.getElementById('qrtext').value);
+    }
+    function setDefault() {
+          document.getElementById('qrcode').innerHTML='';
+          QR('128', '#0000ff', '#00ffff', 'H');
+          qrenc.clear();
+          qrenc.makeCode(document.getElementById('qrtext').value);
+    }
+    function checkRGB(color) {
+        return color.match(/^\#[0-9A-Fa-f]{3}|^\#[0-9A-Fa-f]{6}/);
+    }
+    </script>
 
 </head>
-<body onload="openTab('Main', 'btnMainTab'); debug();">
-
-    <!-- Debug information frame. Invisible if not enabled -->
-    <div id="vw_debug" class="frame" style="display:none">
-        <span id="w_debug">some debug text (html)</span>
-    </div>
-
-    <!-- Buttons to switch tabs -->
-    <div>
-        <button class="tbtn" id="btnMainTab" onclick="openTab('Main', 'btnMainTab')">Main</button>
-        <button class="tbtn" id="btnSettingsTab" onclick="openTab('Settings', 'btnSettingsTab')">Settings</button>
-    </div>
+<body>
 
     <!-- Main tab -->
-    <div id="Main" class="tab" style="display:none">
-        <h3>
-            <span id="w_header">Empty WebView application (html)</span>
-        </h3>
+    <div id="Main" class="tab" style="display:block">
 
-        <!-- About and Help button frame -->
-        <div id="vw_msg" style="display:none" class="frame">
-            <span id="w_msg">Some message (html)</span>
-            <button class="wbtn" id="btnHelp" style="width:100%;outline:0;margin-top:0.5em" onclick="hCallback()">Help</button>
+<div id="qrcode" style="margin:25px"></div>
+
+<form><br>  <textarea
+      placeholder="Enter text to encode here..."
+      cols="33"
+      rows="5"
+      id="qrtext"
+      onkeyup="
+        refresh();
+      "
+  ></textarea>
+  <br/>
+  <button
+      type="button"
+      onClick="refresh();"
+  >
+Encode
+  </button>
+  <button
+      type="button"
+      onClick="
+          qrenc.clear();
+          qrenc.makeCode('');
+          document.getElementById('qrtext').value = '';
+      "
+  >
+Clear
+  </button>
+  <br />
+  Size [64 - 1024]
+  <input type="number" id="size" size="4" value="256" onkeyup="refresh();" style="width:3em;" />
+  <br />
+  Color dark/light [#RGB or #RRGGBB]<br />
+  <input type="text" id="dark" size="6" value="#000000" onkeyup="refresh();" />/
+  <input type="text" id="light" size="6" value="#ffffff" onkeyup="refresh();"/>
+  <br />
+  Correction level
+  <select name="correction" id="corr" value="L" onchange="refresh();">
+      <option value="L">L (7%)</option>
+      <option value="M">M (15%)</option>
+      <option value="Q">Q (25%)</option>
+      <option value="H">H (30%)</option>
+  </select>
+</form>
+
+    <script>
+    QR('128', '#0000ff', '#00ffff', 'H');
+    qrenc.clear();
+    qrenc.makeCode('');
+    </script>
+
         </div>
-
-        <!-- "The Button" frame -->
-        <div class="frame">
-            Some button:
-            <button class="wbtn" id="btnFileManager" style="width:100%;outline:0;margin-top:0.5em" onclick="bCallback()">The Button</button>
-        </div>
-    </div><!-- End of Main tab -->
-
-    <!-- Settings tab -->
-    <div id="Settings" class="tab" style="display:none">
-
-        <!-- Settings frame -->
-        <div class="frame">
-            <table>
-                <caption><b>Settings:</b></caption>
-                <tr>
-                    <td>Application language:</td>
-                    <td><span id="s_lang">(html)</span></td>
-                </tr>
-            </table>
-            <div id="wrapper" class="fragment">
-                <button class="wbtn" id="btnSettings" style="width:100%;outline:0;margin-top:0.5em" onclick="sCallback()">Change settings</button>
-            </div>
-        </div>
-    </div> <!-- End of settings tab -->
 
 </body>
 
