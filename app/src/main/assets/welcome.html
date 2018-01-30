@@ -132,20 +132,38 @@ Encode
 Clear
   </button>
   <br />
-  Size [64 - 1024]
+    <table style="padding-top:0.7em">
+      <tr>
+        <td>
+  Size<br />[64px - 1024px]
+        </td>
+        <td>
   <input type="number" id="size" size="4" value="256" onkeyup="refresh();" style="width:3em;" />
-  <br />
-  Color dark/light [#RGB or #RRGGBB]<br />
+        </td>
+     </tr>
+     <tr>
+       <td>
+  Color dark/light<br />[#RGB or #RRGGBB]
+       </td>
+       <td>
   <input type="text" id="dark" size="7" value="#000000" onkeyup="refresh();" />/
   <input type="text" id="light" size="7" value="#ffffff" onkeyup="refresh();"/>
-  <br />
-  Correction level
+       </td>
+     </tr>
+     <tr>
+       <td>
+  Error correction level
+       </td>
+       <td>
   <select name="correction" id="corr" value="L" onchange="refresh();">
       <option value="L">L (7%)</option>
       <option value="M">M (15%)</option>
       <option value="Q">Q (25%)</option>
       <option value="H">H (30%)</option>
   </select>
+     </td>
+   </tr>
+ </table>
 </form>
 </div>
 
