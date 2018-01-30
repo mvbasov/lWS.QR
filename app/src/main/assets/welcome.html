@@ -48,7 +48,9 @@
           if (mSize > 1024 || mSize < 64) mSize = 128;
           if (!checkRGB(mDark)) mDark = '#000000';
           if (!checkRGB(mLight)) mLight = '#FFFFFF';
-          document.getElementById('qrcode').innerHTML='';
+          var qrarea = document.getElementById('qrcode');
+          qrarea.style.width = "20%";
+          qrarea.innerHTML='';
           QR(
             mSize,
             mDark,
@@ -78,12 +80,31 @@
 
     <!-- Main tab -->
     <div id="Main" class="tab" style="display:block">
-
-<div id="qrcode" style="margin:25px"></div>
-
-<form><br>  <textarea
+<div class="frame">
+<div
+    id="qrcode"
+    style="
+        display:table;
+        width:85%;
+        margin: 1.7em auto;
+    "
+>
+<h4>lWS QR</h4>
+This programm designed as QR Code plugin for lightweight Web Server (<a href="https://play.google.com/store/apps/details?id=net.basov.lws.r">lWS</a>).
+It can be used as small and simple QR code generator also.
+It can be easyly integrated to your application.
+Source code and aditional information available <a href="http://github.com/mvbasov/lWS.QR">here</a>
+</div>
+</div>
+<div class="frame">
+<form>
+  <br />
+  <textarea
+      style="
+          width:98%;
+          margin: 0 0 0.5em 0;
+      "
       placeholder="Enter text to encode here..."
-      cols="31"
       rows="3"
       id="qrtext"
       onkeyup="
@@ -92,6 +113,7 @@
   ></textarea>
   <br/>
   <button
+      style="width:49.25%"
       type="button"
       onClick="refresh();"
        console.log('encode button');     
@@ -99,6 +121,7 @@
 Encode
   </button>
   <button
+      style="width:49.25%"
       type="button"
       onClick="
           qrenc.clear();
@@ -124,12 +147,13 @@ Clear
       <option value="H">H (30%)</option>
   </select>
 </form>
+</div>
 
-    <script>
-    QR('128', '#000000', '#FFFFFF', 'L');
-    qrenc.clear();
-    qrenc.makeCode('');
-    </script>
+  <script>
+//    QR('256', '#000000', '#FFFFFF', 'L');
+//    qrenc.clear();
+//    qrenc.makeCode('');
+  </script>
 
         </div>
 
