@@ -10,6 +10,15 @@
 
     <script type="text/javascript">
       console.log('start head script');
+    var welcome = `
+<h4 align="center">lWS QR</h4>
+This programm designed as QR Code plugin for lightweight Web Server (<a href="https://play.google.com/store/apps/details?id=net.basov.lws.r">lWS</a>).
+It can be used standalone as small and simple QR code generator also.
+Start to enter text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
+To see this text again press 'Clear' button.
+lWS QR can be easyly integrated with your application.
+Source code and aditional information available <a href="http://github.com/mvbasov/lWS.QR">here</a>
+`;
     var qrenc;
     function QR (size, dark, light, cor) {
       var cl = QRCode.CorrectLevel.L;
@@ -41,25 +50,34 @@
     }
     function refresh() {
           console.log('start refresh()');
-          var mSize = document.getElementById('size').value;
-          var mDark = document.getElementById('dark').value;
-          var mLight = document.getElementById('light').value;
-          var mCorr = document.getElementById('corr').value;
-          if (mSize > 1024 || mSize < 64) mSize = 128;
-          if (!checkRGB(mDark)) mDark = '#000000';
-          if (!checkRGB(mLight)) mLight = '#FFFFFF';
+          var qrtext = document.getElementById('qrtext').value;
           var qrarea = document.getElementById('qrcode');
-          qrarea.style.width = "20%";
-          qrarea.innerHTML='';
-          QR(
-            mSize,
-            mDark,
-            mLight,
-            document.getElementById('corr').value
-          );
-          qrenc.clear();
-          qrenc.makeCode(document.getElementById('qrtext').value);
-                console.log('finish refresh()');
+          if (qrtext.length == 0) {
+            qrarea.style.width = '90%';
+            qrarea.style.margin = 'auto';
+            qrarea.innerHTML = welcome;
+          } else {
+            var mSize = document.getElementById('size').value;
+            var mDark = document.getElementById('dark').value;
+            var mLight = document.getElementById('light').value;
+            var mCorr = document.getElementById('corr').value;
+            if (mSize > 1024 || mSize < 64) mSize = 128;
+            if (!checkRGB(mDark)) mDark = '#000000';
+            if (!checkRGB(mLight)) mLight = '#FFFFFF';
+
+            qrarea.style.width = "20%";
+            qrarea.style.margin = "1.2em auto";
+            qrarea.innerHTML='';
+            QR(
+              mSize,
+              mDark,
+              mLight,
+              document.getElementById('corr').value
+            );
+            qrenc.clear();
+            qrenc.makeCode(qrtext);
+          }
+          console.log('finish refresh()');
     }
     function setDefault() {
           console.log('start setDefault()');
@@ -86,14 +104,9 @@
     style="
         display:table;
         width:85%;
-        margin: 1.7em auto;
+        margin: 1.1em auto;
     "
 >
-<h4>lWS QR</h4>
-This programm designed as QR Code plugin for lightweight Web Server (<a href="https://play.google.com/store/apps/details?id=net.basov.lws.r">lWS</a>).
-It can be used as small and simple QR code generator also.
-It can be easyly integrated to your application.
-Source code and aditional information available <a href="http://github.com/mvbasov/lWS.QR">here</a>
 </div>
 </div>
 <div class="frame">
@@ -127,6 +140,7 @@ Encode
           qrenc.clear();
           qrenc.makeCode('');
           document.getElementById('qrtext').value = '';
+          refresh();
       "
   >
 Clear
@@ -167,10 +181,8 @@ Clear
 </form>
 </div>
 
-  <script>
-//    QR('256', '#000000', '#FFFFFF', 'L');
-//    qrenc.clear();
-//    qrenc.makeCode('');
+  <script type="text/javascript">
+refresh();
   </script>
 
         </div>
