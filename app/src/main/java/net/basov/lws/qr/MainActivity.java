@@ -54,7 +54,27 @@ public class MainActivity extends Activity {
         //ui.displayWelcomeScreen(mainUI_WV);
         mainUI_WV.loadUrl("file:///android_asset/" + getString(R.string.welcome_ui_file));
 
+    }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        //super.onNewIntent(intent);
+        if (intent == null) return;
+        if (intent.getAction().equals("net.basov.lws.qr.ENCODE")) {
+            if (intent != null) {
+                Bundle extras = intent.getExtras();
+                if (extras != null) {
+                    if (extras.getString("ENCODE_DATA") != null) interactive = false;
+                    txt = extras.getString("ENCODE_DATA", "");
+                    size = extras.getString("ENCODE_SIZE", "256");
+                    dark = extras.getString("ENCODE_DARK", "#e0ffff");
+                    light = extras.getString("ENCODE_LIGHT", "#000");
+                    corr = extras.getString("ENCODE_CORRECTION", "L");
+                }
+            }
+        } else if (intent.getAction().equals("android.intent.action.MAIN")) {
+            interactive = true;
+        }
     }
 
     @Override
@@ -103,15 +123,6 @@ public class MainActivity extends Activity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             String js = "";
-            
-            // TODO: DEBUG
-            interactive = false;
-            size = "256";
-            dark = "#000";
-            light = "#e0ffff";
-            corr = "L";
-            txt = "a\thttp://192.168.235:8080/'\n\"";
-         
             if(interactive) {
                 js = "document.getElementById('interactive').style.display = 'block';"
                 + "welcome = '" + escapeCharsForJSON(view.getContext().getString(R.string.welcome_msg)) + "';";        
