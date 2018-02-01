@@ -1,24 +1,88 @@
 apply plugin: 'com.android.application'
 
 android {
+    def last_tag = getGitRevParseInfo("describe --tags --abbrev=0")
+    def commit_count = getGitRevParseInfo("rev-list --count ${last_tag}..")
+    def current_commit = getGitRevParseInfo("rev-parse --short")
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "lWS.QR." + versionName + ".apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+            if (variant.getBuildType().isMinifyEnabled()) {
+                variant.assemble.doLast{
+                    copy {
+                        from variant.mappingFile
+                        into output.outputFile.parent
+                        rename { String fileName ->
+                            "lWS.QR." + versionName + "_mapping.txt"
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    signingConfigs {
+       release {
+            storeFile file('../../.keys/mvb-release.keystore')
+            keyAlias 'mvb_key'
+        }
+        debug {
+            storeFile file('../../.keys/mvb-debug.keystore')
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+    }
+
     compileSdkVersion 24
     buildToolsVersion '25.0.0'
-
     lintOptions {
         disable 'SetJavaScriptEnabled', 'GoogleAppIndexingWarning'
     }
 
     defaultConfig {
+// Keep two lines arround applicationId unchanged to allow use patch for F-Droid build
+
+    
         applicationId "net.basov.lws.qr"
+    
+
+// End of strings reserved for F-Droid patch
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 300
         versionName "00.03.00"
     }
+
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+       release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            zipAlignEnabled true
+            applicationIdSuffix '.gpm'
+            versionNameSuffix "r-g" + current_commit
+            signingConfig signingConfigs.release
+        }
+        betta {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            applicationIdSuffix '.gpm'
+            versionNameSuffix "b-g" + current_commit
+            debuggable false
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            debuggable true
+            versionNameSuffix 'a-' + commit_count + "-g" + current_commit
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -34,5 +98,11 @@ task makeJS(type: Exec) {
 build.dependsOn makeJS
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+static def getGitRevParseInfo (what) {
+    def cmd = "git " + what + " HEAD"
+    def proc = cmd.execute ()
+    proc.text.trim ()
 }

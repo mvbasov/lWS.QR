@@ -19,26 +19,11 @@ gradlew.bat
 
 .idea/
 
-## User-specific configurations
-#/*/.idea/libraries/
-#/*/.idea/workspace.xml
-#/*/.idea/tasks.xml
-#/*/.idea/.name
-#/*/.idea/compiler.xml
-#/*/.idea/copyright/profiles_settings.xml
-#/*/.idea/encodings.xml
-#/*/.idea/misc.xml
-#/*/.idea/gradle.xml
-#/*/.idea/modules.xml
-#/*/.idea/scopes/scope_settings.xml
-#/*/.idea/vcs.xml
 *.iml
 
 # built application files
 *.apk
 *.ap_
-!app/Ticket-Info.*b.apk
-!app/old_versions/Ticket-Info.*b.apk
 
 # files for the dex VM
 *.dex
@@ -50,5 +35,6 @@ gradlew.bat
 *.o
 *.so
 
-
+# ProGuard mapping files
+*_mapping.txt
 
