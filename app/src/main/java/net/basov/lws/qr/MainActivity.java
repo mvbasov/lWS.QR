@@ -17,6 +17,14 @@ import android.util.Log;
 
 public class MainActivity extends Activity {
     private WebView mainUI_WV;
+    
+    static String size = "256";
+    static String dark = "#000";
+    static String light = "#e0ffff";
+    static String corr = "L";
+    static String txt = "";
+    static Boolean interactive = true;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +39,11 @@ public class MainActivity extends Activity {
         //mainUI_WV.addJavascriptInterface(new WebViewJSCallback(this), "Android");
         /* Show external page in browser */
         mainUI_WV.setWebViewClient(new MyWebViewClient());
-        /* Handle JavaScript console log */
-        mainUI_WV.setWebChromeClient(new myWebChromeClient());
-
-        /* Enable chome remote debuging for WebView (Ctrl-Shift-I) */
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
+        if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)) {
+            /* Handle JavaScript console log */
+            mainUI_WV.setWebChromeClient(new myWebChromeClient());
+            /* Enable chome remote debuging for WebView (Ctrl-Shift-I) */
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { 
                 WebView.setWebContentsDebuggingEnabled(true);
             }
         }
@@ -95,11 +102,36 @@ public class MainActivity extends Activity {
 
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                view.evaluateJavascript("javascript:jreplace('" + welcome_json.toString() +"')",null);
-//            } else {
-//                view.loadUrl("javascript:jreplace('" + welcome_json.toString() +"')",null);
-//            }
+            String js = "";
+            
+            // TODO: DEBUG
+            interactive = false;
+            size = "256";
+            dark = "#000";
+            light = "#e0ffff";
+            corr = "L";
+            txt = "a\thttp://192.168.235:8080/'\n\"";
+         
+            if(interactive) {
+                js = "document.getElementById('interactive').style.display = 'block';"
+                + "welcome = '" + escapeCharsForJSON(view.getContext().getString(R.string.welcome_msg)) + "';";        
+            } else {
+                js = ""        
+                + "document.getElementById('size').value = '" + size +"';"
+                + "document.getElementById('dark').value = '" + dark + "';"
+                + "document.getElementById('light').value = '" + light + "';"
+                + "document.getElementById('corr').value = '" + corr +"';"
+                + "document.getElementById('qrtext').value = '" + escapeCharsForJSON(txt) + "';"
+                + "document.getElementById('text').innerHTML = '" + escapeCharsForJSON(txt) + "';"
+                + "document.getElementById('unattended').style.display = 'block';";
+            }
+            js += "refresh();";
+            
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                view.evaluateJavascript("javascript:" + js,null);
+            } else {
+                view.loadUrl("javascript:" + js,null);
+            }
             view.clearCache(true);
             view.clearHistory();
         }

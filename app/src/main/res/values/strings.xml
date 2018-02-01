@@ -4,5 +4,13 @@
     <!-- Ordinary language dependent strings -->
     <string name="app_name">lWS QR</string>
     <string name="welcome_ui_file">welcome.html</string>
+    <string name="welcome_msg"><![CDATA["<h4 align="center">lWS QR</h4>
+This programm designed as QR Code plugin for lightweight Web Server (<a href=\"https://play.google.com/store/apps/details?id=net.basov.lws.r\">lWS</a>).
+It can be used standalone as small and simple QR code generator also.
+Start to enter text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
+To see this text again press 'Clear' button.
+lWS QR can be easyly integrated with your application.
+Source code and aditional information available <a href=\"http://github.com/mvbasov/lWS.QR\">here</a>"
+    ]]></string>
 
 </resources>
