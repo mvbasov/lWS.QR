@@ -1,3 +1,4 @@
+<a href="https://play.google.com/store/apps/details?id=net.basov.lws.qr.gpm"><img src="https://github.com/mvbasov/lWS/raw/master/google-play-badge.png" width="215" height="83" alt="Available on Google Play"/></a>
 ### lightweight Web Server QR code plugin.
 
 This programm designed as QR Code plugin for [lightweight Web Server (lWS)](https://github.com/mvbasov/lWS).
