@@ -185,30 +185,52 @@ Encode
   >
 Clear
   </button>
-  <br />
-    <table style="padding-top:0.7em">
+    <div class="frame">
+    <table align="center">
       <tr>
         <td>
-  Size<br />[64px - 1024px]
+  Size [64px - 1024px]
         </td>
-        <td>
-  <input type="number" id="size" size="4" value="256" onkeyup="refresh();" style="width:3em;" />
+        <td align="right">
+  <input type="number"  id="size" size="4" value="256" onkeyup="refresh();" style="width:3em;" />
         </td>
      </tr>
      <tr>
-       <td>
-  Color dark/light<br />[#RGB or #RRGGBB]
+       <td colspan="2">
+         <hr style="margin-top:0.1em;margin-bottom:0.1em"/>
        </td>
-       <td>
-  <input type="text" id="dark" size="7" value="#000000" onkeyup="refresh();" />/
+     </tr>
+     <tr>
+       <td colspan="2">
+  Color [#RGB or #RRGGBB]
+       </td>
+     </tr>
+     <tr>
+       <td align="center">
+         foreground
+       </td>
+       <td align="center">
+         background
+       </td>
+     </tr>
+     <tr>
+       <td align="center">
+  <input type="text" id="dark" size="7" value="#000000" onkeyup="refresh();" />
+       </td>
+       <td align="center">
   <input type="text" id="light" size="7" value="#e0ffff" onkeyup="refresh();"/>
+       </td>
+     </tr>
+     <tr>
+       <td colspan="2">
+         <hr style="margin-top:0.1em;margin-bottom:0.1em"/>
        </td>
      </tr>
      <tr>
        <td>
   Error correction level
        </td>
-       <td>
+       <td align="right">
   <select name="correction" id="corr" value="L" onchange="refresh();">
       <option value="L">L (7%)</option>
       <option value="M">M (15%)</option>
@@ -218,6 +240,7 @@ Clear
      </td>
    </tr>
  </table>
+ </div>
 </form>
 </div>
 
