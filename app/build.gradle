@@ -70,7 +70,7 @@ android {
             versionNameSuffix "r-g" + current_commit
             signingConfig signingConfigs.release
         }
-        betta {
+        beta {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
