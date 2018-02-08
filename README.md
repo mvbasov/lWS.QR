@@ -26,5 +26,6 @@ try {
 }
 ```
 ### License
-This software licensed under [MIT license](LICENSE).
-To create QR code used [qrcode.js](https://davidshimjs.github.io/qrcodejs/) licensed under MIT license also.
+This software licensed under [MIT license](LICENSE). Copyright (c) 2018 Mikhail Basov
+
+To create QR code this program uses [qrcode.js](https://davidshimjs.github.io/qrcodejs/) licensed under MIT license also. Copyright (c) 2012 davidshimjs
