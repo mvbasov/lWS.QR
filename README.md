@@ -28,4 +28,4 @@ try {
 ### License
 This software licensed under [MIT license](LICENSE). Copyright (c) 2018 Mikhail Basov
 
-To create QR code this program uses [qrcode.js](https://davidshimjs.github.io/qrcodejs/) licensed under MIT license also. Copyright (c) 2012 davidshimjs
+To create QR code this program uses [QR Code generator library](https://github.com/nayuki/QR-Code-generator) licensed under MIT license also. Copyright (c) 2017 Project Nayuki.
