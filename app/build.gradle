@@ -88,11 +88,12 @@ android {
 }
 
 task makeJS(type: Exec) {
-    inputs.file file("qrcodejs/qrcode.js")
+    inputs.file file("QR-Code-generator/javascript/qrcodegen.js")
     //outputs.dir("src/main/assets")
-    outputs.file file("src/main/assets/qrcode.min.js")
-    commandLine "uglifyjs", "--comments", "'/\\*[^\\0]+?@author[^\\0]+?\\*/'", "-o", "src/main/assets/qrcode.min.js", "qrcodejs/qrcode.js"
-    println "Create minifyed qrcode.js"
+    outputs.file file("src/main/assets/qrcodegen.min.js")
+
+    commandLine 'sh', '-c', 'uglifyjs --comments \'/\\*[^\\0]+?Copyright[^\\0]+?\\*/\' -o src/main/assets/qrcodegen.min.js QR-Code-generator/javascript/qrcodegen.js'
+    println "Create minifyed qrcodegen.js"
 }
 
 build.dependsOn makeJS
