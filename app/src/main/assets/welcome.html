@@ -9,9 +9,6 @@
     <script type="text/javascript" src="qrcodegen.min.js"></script>
 
     <script type="text/javascript">
-    // TODO: remove debug
-    console.log('start head script');
-    var welcome = 'Loading...';
     function redrawQR() {
       var text = document.getElementById('qrtext').value;
       var qrarea = document.getElementById('qrcode');
@@ -108,8 +105,6 @@
         elem.removeChild(elem.firstChild);
       elem.appendChild(document.createTextNode(stats));
     }
-     // TODO: remove debug
-    console.log('finish head script');
     </script>
 
 </head>
@@ -264,9 +259,9 @@ Min version [1-40]
 
   <script type="text/javascript">
     // TODO: remove debug
-    document.getElementById('interactive').style.display = 'block';
+//    document.getElementById('interactive').style.display = 'block';
 
-    redrawQR();
+//    redrawQR();
 
   </script>
 
