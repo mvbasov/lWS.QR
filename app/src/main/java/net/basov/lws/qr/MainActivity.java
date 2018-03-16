@@ -160,7 +160,7 @@ public class MainActivity extends Activity {
                 + "document.getElementById('text').innerHTML = '" + escapeCharsForJSON(txt) + "';"
                 + "document.getElementById('unattended').style.display = 'block';";
             }
-            js += "refresh();";
+            js += "redrawQR();";
             
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 view.evaluateJavascript("javascript:" + js,null);
