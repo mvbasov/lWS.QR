@@ -1,111 +1,112 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!--
-    // To set from code execute the following:
-    //
-    //document.getElementById('size').value = '" + size +"';"
-    //document.getElementById('dark').value = '" + dark + "';"
-    //document.getElementById('light').value = '" + light + "';"
-    //document.getElementById('corr').value = '" + corr +"';"
-    //document.getElementById('qrtext').value = '" + escapeCharsForJSON(txt) + "';"
-    //document.getElementById('text').innerHTML = '" + escapeCharsForJSON(txt) + "';"
-    //document.getElementById('unattended').style.display = 'block';";
-    //
-    // For interactive mode:
-    //
-    //document.getElementById('interactive').style.display = 'block';
-    //
-    // Then call for both variants:
-    //
-    //refresh();
--->
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
     <link rel="stylesheet" type="text/css" href="common.css">
 
-    <script type="text/javascript" src="qrcode.min.js"></script>
+    <script type="text/javascript" src="qrcodegen.min.js"></script>
 
     <script type="text/javascript">
     // TODO: remove debug
     console.log('start head script');
     var welcome = 'Loading...';
+    function redrawQR() {
+      var text = document.getElementById('qrtext').value;
+      var qrarea = document.getElementById('qrcode');
+      if (text.length == 0) {
+        qrarea.style.width = '90%';
+        qrarea.style.margin = 'auto';
+        qrarea.innerHTML = welcome;
+        return;
+      } else {
+        qrarea.style.width = '5%';
+        qrarea.style.margin = '0.1em auto 0.1em';
+        qrarea.innerHTML = "<canvas id=\"qrcode-canvas\" style=\"padding:1em; background-color:#E8E8E8\" />"
+      }
+      var segs = qrcodegen.QrSegment.makeSegments(text);
+      var canvas = document.getElementById("qrcode-canvas");
+      var ecl = qrcodegen.QrCode.Ecc.LOW;
+      switch(document.getElementById('corr').value) {
+        case 'L':
+          ecl = qrcodegen.QrCode.Ecc.LOW;
+          break;
+        case 'M':
+          ecl = qrcodegen.QrCode.Ecc.MEDIUM;
+          break;
+        case 'Q':
+          ecl = qrcodegen.QrCode.Ecc.QUARTILE;
+          break;
+        case 'H':
+          ecl = qrcodegen.QrCode.Ecc.HIGH;
+          break;
+        default:
+          ecl = qrcodegen.QrCode.Ecc.LOW;
+      }
+      var mask = parseInt(document.getElementById("mask").value, 10);
+      var minVer = parseInt(document.getElementById("min_version").value, 10);
+      if ( minVer <= 0 || scale > 40 ) {
+          minVer = 1;
+          document.getElementById("minVer").value = 1;
+      }
+      var boostEcc = document.getElementById("boost_ecc").checked;
+      var qr = qrcodegen.QrCode.encodeSegments(segs, ecl, minVer, 40, mask, boostEcc);
+      var scale = parseInt(document.getElementById("module_size").value, 10);
+      if ( scale <= 1 || scale > 32 ) {
+          scale = 4;
+          document.getElementById("module_size").value = 4;
+      }
 
-    var qrenc;
-    function QR (size, dark, light, cor) {
-      var cl = QRCode.CorrectLevel.L;
-      switch(cor) {
-          case 'L':
-                cl=QRCode.CorrectLevel.L
-                break;
-          case 'M':
-                cl=QRCode.CorrectLevel.M
-                break;
-          case 'Q':
-                cl=QRCode.CorrectLevel.Q
-                break;
-          case 'H':
-                cl=QRCode.CorrectLevel.H
-                break;
-          default:
-                cl=QRCode.CorrectLevel.L
+      qr.drawCanvas(scale, 4, canvas);
+      canvas.style.removeProperty("display");
 
-      }  
-      qrenc = new QRCode(document.getElementById('qrcode'), {
-          text: '',
-          width: size,
-          height : size,
-          colorDark : dark,
-          colorLight : light,
-          correctLevel : cl
-      });
-    }
-    function refresh() {
-          // TODO: remove debug
-          console.log('start refresh()');
-          var qrtext = document.getElementById('qrtext').value;
-          var qrarea = document.getElementById('qrcode');
-          if (qrtext.length == 0) {
-            qrarea.style.width = '90%';
-            qrarea.style.margin = 'auto';
-            qrarea.innerHTML = welcome;
-          } else {
-            var mSize = document.getElementById('size').value;
-            var mDark = document.getElementById('dark').value;
-            var mLight = document.getElementById('light').value;
-            var mCorr = document.getElementById('corr').value;
-            if (mSize > 1024 || mSize < 64) mSize = 128;
-            if (!checkRGB(mDark)) mDark = '#000000';
-            if (!checkRGB(mLight)) mLight = '#E0FFFF';
+      // Returns a string to describe the given list of segments.
+      function describeSegments(segs) {
+        if (segs.length == 0)
+            return "none";
+        else if (segs.length == 1) {
+            var mode = segs[0].mode;
+            var Mode = qrcodegen.QrSegment.Mode;
+            if (mode == Mode.NUMERIC     )  return "numeric";
+            if (mode == Mode.ALPHANUMERIC)  return "alphanumeric";
+            if (mode == Mode.BYTE        )  return "byte";
+            if (mode == Mode.KANJI       )  return "kanji";
+            return "unknown";
+        } else
+            return "multiple";
+      }
 
-            qrarea.style.width = "20%";
-            qrarea.style.margin = "1.2em auto";
-            qrarea.innerHTML='';
-            QR(
-              mSize,
-              mDark,
-              mLight,
-              document.getElementById('corr').value
-            );
-            qrenc.clear();
-            qrenc.makeCode(qrtext);
-          }
-          // TODO: remove debug
-          console.log('finish refresh()');
-    }
-    function setDefault() {
-          // TODO: remove debug
-          console.log('start setDefault()');
-          document.getElementById('qrcode').innerHTML='';
-          QR('128', '#000000', '#e0ffff', 'H');
-          qrenc.clear();
-          qrenc.makeCode(document.getElementById('qrtext').value);
-           // TODO: remove debug
-          console.log('finish setDefault()');
-    }
-    function checkRGB(color) {
-        return color.match(/^\#[0-9A-Fa-f]{3}$|^\#[0-9A-Fa-f]{6}$/);
+      // Returns the number of Unicode code points in the given UTF-16 string.
+      function countUnicodeChars(str) {
+        var result = 0;
+        for (var i = 0; i < str.length; i++, result++) {
+            var c = str.charCodeAt(i);
+            if (c < 0xD800 || c >= 0xE000)
+                continue;
+            else if (0xD800 <= c && c < 0xDC00) {  // High surrogate
+                i++;
+                var d = str.charCodeAt(i);
+                if (0xDC00 <= d && d < 0xE000)  // Low surrogate
+                    continue;
+            }
+            throw "Invalid UTF-16 string";
+        }
+        return result;
+      }
+
+      // Show the QR Code symbol's statistics as a string
+      var stats = "Statistics: \n";
+      stats += "QR Code version: " + qr.version + ", ";
+      stats += "mask pattern: " + qr.mask + "\n";
+      stats += "character count: " + countUnicodeChars(text) + ", ";
+      stats += "encoding mode: " + describeSegments(segs) + "\n";
+      stats += "error correction level: " + "LMQH".charAt(qr.errorCorrectionLevel.ordinal) + ", ";
+      stats += "data bits: " + qrcodegen.QrSegment.getTotalBits(segs, qr.version) + ".";
+      var elem = document.getElementById("statistics-output");
+      while (elem.firstChild != null)
+        elem.removeChild(elem.firstChild);
+      elem.appendChild(document.createTextNode(stats));
     }
      // TODO: remove debug
     console.log('finish head script');
@@ -115,16 +116,18 @@
 <body>
 
     <!-- Main tab -->
-    <div id="Main" class="tab" style="display:block">
+<div id="Main" class="tab" style="display:block">
 <div class="frame">
 <div
-    id="qrcode"
-    style="
-        display:table;
-        width:85%;
-        margin: 1.0em auto 1em;
-    "
+  id="qrcode"
+  style="
+    display:table;
+    width:5%;
+    margin: 0.1em auto 0.1em;
+  "
 >
+
+    <canvas id="qrcode-canvas" style="padding:1em; background-color:#E8E8E8" />
 </div>
 </div>
 
@@ -161,14 +164,14 @@
       rows="2"
       id="qrtext"
       onkeyup="
-        refresh();
+        redrawQR();
       "
   ></textarea>
   <br/>
   <button
       style="width:49.25%"
       type="button"
-      onClick="refresh();"
+      onClick="redrawQR();"
        console.log('encode button');     
   >
 Encode
@@ -177,22 +180,23 @@ Encode
       style="width:49.25%"
       type="button"
       onClick="
-          qrenc.clear();
-          qrenc.makeCode('');
           document.getElementById('qrtext').value = '';
-          refresh();
+          redrawQR();
       "
   >
 Clear
   </button>
     <div class="frame">
+      <p id="statistics-output" style="white-space:pre"></p>
+    </div>
+    <div class="frame">
     <table align="center">
       <tr>
         <td>
-  Size [64px - 1024px]
+Module size [2px - 32px]
         </td>
         <td align="right">
-  <input type="number"  id="size" size="4" value="256" onkeyup="refresh();" style="width:3em;" />
+  <input type="number"  step="1" id="module_size" min="2" max="32" size="2" value="6" onChange="redrawQR();" style="width:3em;" />
         </td>
      </tr>
      <tr>
@@ -201,24 +205,43 @@ Clear
        </td>
      </tr>
      <tr>
+       <td>
+Error correction level
+       </td>
+       <td align="right">
+         <select name="correction" id="corr" value="L" onchange="redrawQR();">
+           <option value="L">L (7%)</option>
+           <option value="M">M (15%)</option>
+           <option value="Q">Q (25%)</option>
+           <option value="H">H (30%)</option>
+         </select>
+       </td>
+     </tr>
+     <tr>
        <td colspan="2">
-  Color [#RGB or #RRGGBB]
+         <input type="checkbox" checked="checked" id="boost_ecc" onchange="redrawQR();"><label for="boost-ecc-input">Increase <abbr title="error-correcting code">ECC</abbr> level within same version</label>
+       </td>
+     <tr>
+       <td colspan="2">
+         <hr style="margin-top:0.1em;margin-bottom:0.1em"/>
        </td>
      </tr>
      <tr>
-       <td align="center">
-         foreground
+       <td>
+Mask
        </td>
-       <td align="center">
-         background
-       </td>
-     </tr>
-     <tr>
-       <td align="center">
-  <input type="text" id="dark" size="7" value="#000000" onkeyup="refresh();" />
-       </td>
-       <td align="center">
-  <input type="text" id="light" size="7" value="#e0ffff" onkeyup="refresh();"/>
+       <td align="right">
+         <select name="mask" id="mask" value="-1" onchange="redrawQR();">
+           <option value="-1">Auto</option>
+           <option value="0">0</option>
+           <option value="1">1</option>
+           <option value="2">2</option>
+           <option value="3">3</option>
+           <option value="4">4</option>
+           <option value="5">5</option>
+           <option value="6">6</option>
+           <option value="7">7</option>
+         </select>
        </td>
      </tr>
      <tr>
@@ -228,27 +251,23 @@ Clear
      </tr>
      <tr>
        <td>
-  Error correction level
+Min version [1-40]
        </td>
        <td align="right">
-  <select name="correction" id="corr" value="L" onchange="refresh();">
-      <option value="L">L (7%)</option>
-      <option value="M">M (15%)</option>
-      <option value="Q">Q (25%)</option>
-      <option value="H">H (30%)</option>
-  </select>
-     </td>
-   </tr>
+  <input type="number"  step="1" id="min_version" min="1" max="40" size="2" value="1" onChange="redrawQR();" style="width:3em;" />
+       </td>
+    </tr>
  </table>
  </div>
 </form>
 </div>
 
   <script type="text/javascript">
-    // Initialization
-    QR('128', '#000000', '#e0ffff', 'H');
-    qrenc.clear();
-    refresh();
+    // TODO: remove debug
+    document.getElementById('interactive').style.display = 'block';
+
+    redrawQR();
+
   </script>
 
         </div>
