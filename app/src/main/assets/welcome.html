@@ -44,17 +44,11 @@
       }
       var mask = parseInt(document.getElementById("mask").value, 10);
       var minVer = parseInt(document.getElementById("min_version").value, 10);
-      if ( minVer <= 0 || scale > 40 ) {
-          minVer = 1;
-          document.getElementById("minVer").value = 1;
-      }
+      if ( minVer <= 0 || minVer > 40 ) minVer = 1;
       var boostEcc = document.getElementById("boost_ecc").checked;
       var qr = qrcodegen.QrCode.encodeSegments(segs, ecl, minVer, 40, mask, boostEcc);
       var scale = parseInt(document.getElementById("module_size").value, 10);
-      if ( scale <= 1 || scale > 32 ) {
-          scale = 4;
-          document.getElementById("module_size").value = 4;
-      }
+      if ( scale <= 1 || scale > 32 ) scale = 4;
 
       qr.drawCanvas(scale, 4, canvas);
       canvas.style.removeProperty("display");
@@ -207,7 +201,7 @@ Clear
 Module size [2px - 32px]
         </td>
         <td align="right">
-  <input type="number"  step="1" id="module_size" min="2" max="32" size="2" value="6" onChange="redrawQR();" style="width:3em;" />
+  <input type="number"  step="1" id="module_size" min="2" max="32" size="2" value="6" onChange="redrawQR();" onKeyUp="redrawQR();" style="width:3em;" />
         </td>
      </tr>
      <tr>
@@ -265,7 +259,7 @@ Mask
 Min version [1-40]
        </td>
        <td align="right">
-  <input type="number"  step="1" id="min_version" min="1" max="40" size="2" value="1" onChange="redrawQR();" style="width:3em;" />
+  <input type="number"  step="1" id="min_version" min="1" max="40" size="2" value="1" onChange="redrawQR();" onKeyUp="redrawQR();" style="width:3em;" />
        </td>
     </tr>
  </table>
