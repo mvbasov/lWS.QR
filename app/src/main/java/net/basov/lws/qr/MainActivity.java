@@ -42,11 +42,12 @@ import android.util.Log;
 public class MainActivity extends Activity {
     private WebView mainUI_WV;
     
-    static String size = "256";
-    static String dark = "#000";
-    static String light = "#e0ffff";
+    static Integer modSize = 6;
+    static Integer mask = -1;
+    static Integer minVersion = 1;
     static String corr = "L";
     static String txt = "";
+    static String label = txt;
     static Boolean interactive = true;
     
 
@@ -90,10 +91,11 @@ public class MainActivity extends Activity {
                 if (extras != null) {
                     if (extras.getString("ENCODE_DATA") != null) interactive = false;
                     txt = extras.getString("ENCODE_DATA", "");
-                    size = extras.getString("ENCODE_SIZE", "256");
-                    dark = extras.getString("ENCODE_DARK", "#e0ffff");
-                    light = extras.getString("ENCODE_LIGHT", "#000");
+                    label = extras.getString("ENCODE_LABEL", txt);
                     corr = extras.getString("ENCODE_CORRECTION", "L");
+                    modSize = extras.getInt("ENCODE_MODULE_SIZE", 6);
+                    mask = extras.getInt("ENCODE_MASK", -1);
+                    minVersion = extras.getInt("ENCODE_MIN_VERSION", 1);
                 }
             }
         } else if (intent.getAction().equals("android.intent.action.MAIN")) {
@@ -151,13 +153,13 @@ public class MainActivity extends Activity {
                 js = "document.getElementById('interactive').style.display = 'block';"
                 + "welcome = '" + escapeCharsForJSON(view.getContext().getString(R.string.welcome_msg)) + "';";        
             } else {
-                js = ""        
-                + "document.getElementById('size').value = '" + size +"';"
-                + "document.getElementById('dark').value = '" + dark + "';"
-                + "document.getElementById('light').value = '" + light + "';"
+                js = ""
                 + "document.getElementById('corr').value = '" + corr +"';"
                 + "document.getElementById('qrtext').value = '" + escapeCharsForJSON(txt) + "';"
-                + "document.getElementById('text').innerHTML = '" + escapeCharsForJSON(txt) + "';"
+                + "document.getElementById('text').innerHTML = '" + escapeCharsForJSON(label) + "';"
+                + "document.getElementById('module_size').value = '" + modSize +"';"
+                + "document.getElementById('mask').value = '" + mask +"';"
+                + "document.getElementById('min_version').value = '" + minVersion +"';"
                 + "document.getElementById('unattended').style.display = 'block';";
             }
             js += "redrawQR();";

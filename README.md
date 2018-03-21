@@ -14,10 +14,11 @@ try {
       pm.getPackageInfo("net.basov.lws.qr.gpm", 0);
       Intent i = new Intent("net.basov.lws.qr.ENCODE");
       i.putExtra("ENCODE_DATA", textToEncode);//(mandatory) text to encode
-      i.putExtra("ENCODE_SIZE", "256"); //(optional) image size in pixels
-      i.putExtra("ENCODE_DARK", "#000"); //(optional) foreground color
-      i.putExtra("ENCODE_LIGHT", "#e0ffff"); //(optional) background color
-      i.putExtra("ENCODE_CORRECTION", "L"); //(optional) Eroor correction level [L,M,Q,H]
+      i.putExtra("ENCODE_LABEL", textToEncode);//(optional, default: same as text to encode) text above QR code
+      i.putExtra("ENCODE_CORRECTION", "L"); //(optional, default: L) Error correction level [L,M,Q,H]
+      i.putExtra("ENCODE_MODULE_SIZE", 6);//(optional, default 6) Small black square zize in pixels
+      i.putExtra("ENCODE_MASK", -1);//(optional, default -1) QR code data mask 0-7 or -1 for autodetect
+      i.putExtra("ENCODE_MIN_VERSION", 1);//(optional, default 1) Force minimal QR code version (size)                         
       startActivity(i);
 } catch (PackageManager.NameNotFoundException e_lws_qr) {
       Intent i = new Intent(Intent.ACTION_VIEW);
