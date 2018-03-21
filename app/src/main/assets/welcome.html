@@ -93,18 +93,15 @@
         return result;
       }
 
-      // Show the QR Code symbol's statistics as a string
-      var stats = "Statistics: \n";
-      stats += "QR Code version: " + qr.version + ", ";
-      stats += "mask pattern: " + qr.mask + "\n";
-      stats += "character count: " + countUnicodeChars(text) + ", ";
-      stats += "encoding mode: " + describeSegments(segs) + "\n";
-      stats += "error correction level: " + "LMQH".charAt(qr.errorCorrectionLevel.ordinal) + ", ";
-      stats += "data bits: " + qrcodegen.QrSegment.getTotalBits(segs, qr.version) + ".";
-      var elem = document.getElementById("statistics_output");
-      while (elem.firstChild != null)
-        elem.removeChild(elem.firstChild);
-      elem.appendChild(document.createTextNode(stats));
+      // Show the QR Code symbol's statistics
+      document.getElementById("stat_vers").innerHTML = qr.version;
+      document.getElementById("stat_ecc").innerHTML = "LMQH".charAt(qr.errorCorrectionLevel.ordinal);
+      document.getElementById("stat_mask").innerHTML = qr.mask;
+      document.getElementById("stat_bytes_bites").innerHTML = 
+            countUnicodeChars(text)
+            + "/"
+            + qrcodegen.QrSegment.getTotalBits(segs, qr.version);
+      document.getElementById("stat_encoding").innerHTML = describeSegments(segs);
       document.getElementById("statistics_frame").style.display = 'block';
     }
     </script>
@@ -184,7 +181,24 @@ Encode
 Clear
   </button>
     <div class="frame" style="display:none" id="statistics_frame">
-      <p id="statistics_output" style="white-space:pre"></p>
+      <table>
+        <tr>
+          <th>Ver: </th>
+          <td id="stat_vers"></td>
+          <th>ECC: </th>
+          <td id="stat_ecc"></td>
+          <th>Mask: </th>
+          <td id="stat_mask"></td>
+        </tr>
+          <th colspan="4">Data bytes/bites: </th>
+          <td id="stat_bytes_bites"></td>
+        </tr>
+        </tr>
+          <th colspan="4">Encoding mode: </th>
+          <td id="stat_encoding"></td>
+        </tr>
+      </table>
+
     </div>
     <div class="frame">
     <table align="center">
