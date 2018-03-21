@@ -44,11 +44,11 @@
       }
       var mask = parseInt(document.getElementById("mask").value, 10);
       var minVer = parseInt(document.getElementById("min_version").value, 10);
-      if ( minVer <= 0 || minVer > 40 ) minVer = 1;
+      if ( minVer <= 0 || minVer > 40 || isNaN(minVer)) minVer = 1;
       var boostEcc = document.getElementById("boost_ecc").checked;
       var qr = qrcodegen.QrCode.encodeSegments(segs, ecl, minVer, 40, mask, boostEcc);
       var scale = parseInt(document.getElementById("module_size").value, 10);
-      if ( scale <= 1 || scale > 32 ) scale = 4;
+      if ( scale <= 1 || scale > 32 || isNaN(scale)) scale = 4;
 
       qr.drawCanvas(scale, 4, canvas);
       canvas.style.removeProperty("display");
