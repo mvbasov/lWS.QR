@@ -16,6 +16,7 @@
         qrarea.style.width = '90%';
         qrarea.style.margin = 'auto';
         qrarea.innerHTML = welcome;
+        document.getElementById("statistics_frame").style.display = 'none';
         return;
       } else {
         qrarea.style.width = '5%';
@@ -100,10 +101,11 @@
       stats += "encoding mode: " + describeSegments(segs) + "\n";
       stats += "error correction level: " + "LMQH".charAt(qr.errorCorrectionLevel.ordinal) + ", ";
       stats += "data bits: " + qrcodegen.QrSegment.getTotalBits(segs, qr.version) + ".";
-      var elem = document.getElementById("statistics-output");
+      var elem = document.getElementById("statistics_output");
       while (elem.firstChild != null)
         elem.removeChild(elem.firstChild);
       elem.appendChild(document.createTextNode(stats));
+      document.getElementById("statistics_frame").style.display = 'block';
     }
     </script>
 
@@ -181,8 +183,8 @@ Encode
   >
 Clear
   </button>
-    <div class="frame">
-      <p id="statistics-output" style="white-space:pre"></p>
+    <div class="frame" style="display:none" id="statistics_frame">
+      <p id="statistics_output" style="white-space:pre"></p>
     </div>
     <div class="frame">
     <table align="center">
