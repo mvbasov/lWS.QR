@@ -194,8 +194,8 @@ Clear
       </table>
 
     </div>
-    <div class="frame">
-    <div style="display:none" id="advanced">
+    <div class="frame" style="display:none" id="advanced">
+    <div >
     <table align="center">
       <tr>
         <td>
@@ -268,19 +268,20 @@ Min version [1-40]
     </tr>
  </table>
  </div>
-       <button
-         id="adv_btn"
-      style="width:100%"
+ </div>
+ <button
+      id="adv_btn"
+      style="              
+        margin-top: 0.5em;      
+        width:100%"
       type="button"
       onClick="
         var adv = document.getElementById('advanced');
         adv.style.display = adv.style.display == 'none' ? 'block' : 'none';
-        document.getElementById('adv_btn').innerHTML= adv.style.display == 'none' ? 'Show advanced options' : 'Hide advanced options';
-      "
+        document.getElementById('adv_btn').innerHTML= adv.style.display == 'none' ? 'Show advanced options' : 'Hide advanced options';"
   >
 Show advanced options
   </button>
- </div>
 </form>
 </div>
 
