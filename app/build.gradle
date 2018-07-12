@@ -96,7 +96,7 @@ task makeJS(type: Exec) {
     println "Create minifyed qrcodegen.js"
 }
 
-build.dependsOn makeJS
+preBuild.dependsOn('makeJS')
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
