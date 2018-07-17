@@ -34,16 +34,15 @@ div.frame {
     padding: 0.5em;
     margin-top: 0.5em;
 }
-.tbtn {
-    width: 49%;
-    height: 100%;
+.hbtn {
+    width: 49.25%;
     outline:0;
     border-radius: 7px;
 }
 .wbtn {
+    margin-top:0.5em;
     width:100%;
     outline:0;
-    margin-top:0.5em;
     border-radius: 7px;
 }
 .fragment {
