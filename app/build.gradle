@@ -53,7 +53,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 20100
-        versionName "02.01.02"
+        versionName "02.01.00"
     }
 
     buildTypes {
