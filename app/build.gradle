@@ -36,7 +36,7 @@ android {
         }
     }
 
-    compileSdkVersion 24
+    compileSdkVersion 26
     buildToolsVersion '28.0.2'
     lintOptions {
         disable 'SetJavaScriptEnabled', 'GoogleAppIndexingWarning'
@@ -52,8 +52,8 @@ android {
 // End of strings reserved for F-Droid patch
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 20002
-        versionName "02.00.02"
+        versionCode 20100
+        versionName "02.01.02"
     }
 
     buildTypes {
