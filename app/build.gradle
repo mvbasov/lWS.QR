@@ -52,8 +52,20 @@ android {
 // End of strings reserved for F-Droid patch
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 20100
-        versionName "02.01.00"
+        versionCode 30000
+        versionName "03.00.00"
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        gpm {
+            dimension "version"
+            applicationIdSuffix ".gpm"
+        }
+        fdroid {
+             dimension "version"
+            applicationIdSuffix ".fdroid"
+        }
     }
 
     buildTypes {
@@ -62,7 +74,7 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             zipAlignEnabled true
-            applicationIdSuffix '.gpm'
+//            applicationIdSuffix '.gpm'
             versionNameSuffix "r-g" + current_commit
             signingConfig signingConfigs.release
         }
@@ -70,7 +82,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            applicationIdSuffix '.gpm'
+//            applicationIdSuffix '.gpm'
             versionNameSuffix "b-g" + current_commit
             debuggable false
             signingConfig signingConfigs.debug
