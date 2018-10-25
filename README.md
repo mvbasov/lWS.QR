@@ -2,12 +2,12 @@
 <a href="https://f-droid.org/en/packages/net.basov.lws.qr.fdroid/"><img src="https://github.com/mvbasov/lWS/raw/master/f-droid-badge.png" width="215" height="83" alt="Available on F-Droid"/></a>
 ### lightweight Web Server QR code plugin.
 
-This programm designed as QR Code plugin for [lightweight Web Server (lWS)](https://github.com/mvbasov/lWS).
-It can be used standalone as small and simple QR code generator also.
-Start to enter text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
+This programm was designed as a QR Code plugin for the [lightweight Web Server (lWS)](https://github.com/mvbasov/lWS).
+It can also be used by itself as a small and simple QR code generator.
+Start by entering text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
 To see this text again press 'Clear' button.
 ### How to integrate with you application
-lWS QR can be easyly integrated with your application. The following code explain how to do this:
+lWS QR can be easily integrated with your application. The following code explain how to do this:
 ```
 String textToEncode = "Some text to encode";
 PackageManager pm = getApplicationContext().getPackageManager();
@@ -31,3 +31,7 @@ try {
 This software licensed under [MIT license](LICENSE). Copyright (c) 2018 Mikhail Basov
 
 To create QR code this program uses [QR Code generator library](https://github.com/nayuki/QR-Code-generator) licensed under MIT license also. Copyright (c) 2017 Project Nayuki.
+
+### Acknowledgments
+* [Rodrigo I. Ávila D. aka Undigon](https://github.com/Undigon) for my ugly English correction.
+
