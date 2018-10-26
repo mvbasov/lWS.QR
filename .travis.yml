@@ -10,4 +10,5 @@ android:
   before_script:
     - sudo apt-get install -y node-uglify
   script:
+    - sudo apt-get install -y node-uglify
     - ./gradlew clean build assembleFdroid
