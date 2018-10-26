@@ -24,10 +24,6 @@ android {
     }
 
     signingConfigs {
-       release {
-            storeFile file('../../.keys/mvb-release.keystore')
-            keyAlias 'mvb_key'
-        }
         debug {
             storeFile file('../../.keys/mvb-debug.keystore')
             keyAlias 'androiddebugkey'
@@ -63,7 +59,7 @@ android {
             applicationIdSuffix ".gpm"
         }
         fdroid {
-             dimension "version"
+            dimension "version"
             applicationIdSuffix ".fdroid"
         }
     }
@@ -76,7 +72,7 @@ android {
             zipAlignEnabled true
 //            applicationIdSuffix '.gpm'
             versionNameSuffix "r-g" + current_commit
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
         beta {
             minifyEnabled true
@@ -85,7 +81,7 @@ android {
 //            applicationIdSuffix '.gpm'
             versionNameSuffix "b-g" + current_commit
             debuggable false
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
         }
         debug {
             debuggable true
