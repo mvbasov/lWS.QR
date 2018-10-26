@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mvbasov/lWS.QR.svg?branch=master)](https://travis-ci.org/mvbasov/lWS.QR)
 <a href="https://play.google.com/store/apps/details?id=net.basov.lws.qr.gpm"><img src="https://github.com/mvbasov/lWS/raw/master/google-play-badge.png" width="215" height="83" alt="Available on Google Play"/></a>
 <a href="https://f-droid.org/en/packages/net.basov.lws.qr.fdroid/"><img src="https://github.com/mvbasov/lWS/raw/master/f-droid-badge.png" width="215" height="83" alt="Available on F-Droid"/></a>
 ### lightweight Web Server QR code plugin.
