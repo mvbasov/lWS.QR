@@ -8,6 +8,6 @@ android:
     # The SDK version used to compile your project
     - android-26
   before_install:
-        - sudo apt-get install -y uglifyjs
+    - sudo apt-get install -y node-uglify
   script:
     - ./gradlew wrapper --gradle-version 4.6 build connectedCheck
