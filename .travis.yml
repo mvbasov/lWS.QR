@@ -1,5 +1,5 @@
-android:
 language: android
+android:
   components:
     - tools
     - platform-tools
@@ -13,4 +13,3 @@ addons:
   - apt:
     - packages:
       - node-uglify
-
