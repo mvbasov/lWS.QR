@@ -1,7 +1,6 @@
-before-script:
-  - sudo apt-get -y install node-uglify
-android:
+
 language: android
+android:
   components:
     - tools
     - platform-tools
@@ -11,3 +10,5 @@ language: android
     - android-26
   script:
     - ./gradlew clean build assembleFdroid
+before-script:
+  - sudo apt-get -y install node-uglify
