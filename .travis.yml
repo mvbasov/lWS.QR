@@ -1,8 +1,6 @@
 language: android
-addons:
-  apt:
-    packages:
-      - uglifyjs
+before-script:
+    - sudo apt-get -y install node-uglifyjs
 android:
   components:
     - tools
