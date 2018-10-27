@@ -1,7 +1,9 @@
-language: android
+sudo: required
+dist: trusty
 before-script:
-    - sudo apt-get -y install node-uglifyjs
+  - sudo apt-get -y install node-uglifyjs
 android:
+language: android
   components:
     - tools
     - platform-tools
