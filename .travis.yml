@@ -15,5 +15,5 @@ before_script:
   - npm config set strict-ssl false  
   - sudo npm install uglify-js -g
   - chmod ug+x ./gradlew
-  - sed -i -e '/signingConfigs.debug/d' app/build.gradle
+  #- sed -i -e '/signingConfigs.debug/d' app/build.gradle
 

@@ -23,15 +23,6 @@ android {
 
     }
 
-    signingConfigs {
-        debug {
-            storeFile file('../../.keys/mvb-debug.keystore')
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storePassword 'android'
-        }
-    }
-
     compileSdkVersion 26
     buildToolsVersion '28.0.2'
     lintOptions {
@@ -70,18 +61,14 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             zipAlignEnabled true
-//            applicationIdSuffix '.gpm'
             versionNameSuffix "r-g" + current_commit
-//            signingConfig signingConfigs.release
         }
         beta {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-//            applicationIdSuffix '.gpm'
             versionNameSuffix "b-g" + current_commit
             debuggable false
-//            signingConfig signingConfigs.debug
         }
         debug {
             debuggable true
