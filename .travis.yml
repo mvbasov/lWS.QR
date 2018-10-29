@@ -8,10 +8,11 @@ android:
     # The SDK version used to compile your project
     - android-26
   script:
-    - ./gradlew clean build assembleFdroid
+    - ./gradlew clean build assembleFdroidBeta assembleFdroidRelease
 before_script:
   - sudo apt-get install npm
   - sudo apt-get install nodejs-legacy
   - npm config set strict-ssl false  
   - sudo npm install uglify-js -g
+  - chmod ug+x ./gradlew
 
