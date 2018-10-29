@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/mvbasov/lWS.QR.svg?branch=master)](https://travis-ci.org/mvbasov/lWS.QR)
-<a href="https://play.google.com/store/apps/details?id=net.basov.lws.qr.gpm"><img src="https://github.com/mvbasov/lWS/raw/master/google-play-badge.png" width="215" height="83" alt="Available on Google Play"/></a>
-<a href="https://f-droid.org/en/packages/net.basov.lws.qr.fdroid/"><img src="https://github.com/mvbasov/lWS/raw/master/f-droid-badge.png" width="215" height="83" alt="Available on F-Droid"/></a>
 ### lightweight Web Server QR code plugin.
+
+<a href="https://play.google.com/store/apps/details?id=net.basov.lws.qr.gpm"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80" alt="Available on Google Play" /></a>
+<a href="https://travis-ci.org/mvbasov/lWS"><img src="https://travis-ci.org/mvbasov/lWS.QR.svg?branch=master" alt="Tavis CI Build Status" /></a>
+<a href="https://f-droid.org/en/packages/net.basov.lws.qr.fdroid/"><img src="https://f-droid.org/badge/get-it-on.png" height="80" alt="Available on F-Droid" /></a>
 
 This programm was designed as a QR Code plugin for the [lightweight Web Server (lWS)](https://github.com/mvbasov/lWS).
 It can also be used by itself as a small and simple QR code generator.
