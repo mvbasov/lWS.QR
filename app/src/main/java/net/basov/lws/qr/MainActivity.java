@@ -96,6 +96,8 @@ public class MainActivity extends Activity {
                     modSize = extras.getInt("ENCODE_MODULE_SIZE", 6);
                     mask = extras.getInt("ENCODE_MASK", -1);
                     minVersion = extras.getInt("ENCODE_MIN_VERSION", 1);
+                } else {
+                    interactive = true;
                 }
             }
         } else if (intent.getAction().equals("android.intent.action.MAIN")) {
