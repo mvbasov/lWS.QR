@@ -39,8 +39,8 @@ android {
 // End of strings reserved for F-Droid patch
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 30002
-        versionName "03.00.02"
+        versionCode 30100
+        versionName "03.01.00"
     }
 
     flavorDimensions "version"
