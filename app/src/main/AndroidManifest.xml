@@ -19,7 +19,7 @@
             <intent-filter>
                 <action android:name="net.basov.lws.qr.ENCODE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="createQR" />
+                <data android:scheme="createqr" />
             </intent-filter>
         </activity>
 
