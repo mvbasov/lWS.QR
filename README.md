@@ -16,6 +16,7 @@ PackageManager pm = getApplicationContext().getPackageManager();
 try {
       pm.getPackageInfo("net.basov.lws.qr.gpm", 0);
       Intent i = new Intent("net.basov.lws.qr.ENCODE");
+      i.setData(Uri.parse("createqr:"));//(mondatory) set schema
       i.putExtra("ENCODE_DATA", textToEncode);//(mandatory) text to encode
       i.putExtra("ENCODE_LABEL", textToEncode);//(optional, default: same as text to encode) text above QR code
       i.putExtra("ENCODE_CORRECTION", "L"); //(optional, default: L) Error correction level [L,M,Q,H]
