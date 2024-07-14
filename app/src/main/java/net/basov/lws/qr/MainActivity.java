@@ -100,6 +100,15 @@ public class MainActivity extends Activity {
                     interactive = true;
                 }
             }
+        } else if (intent.getAction().equals("android.intent.action.SEND")) {
+            String str = intent.getStringExtra(Intent.EXTRA_TEXT);
+            interactive = false;
+            txt = str;
+            label = str;
+            corr = "L";
+            modSize = 6;
+            mask = -1;
+            minVersion = 1;
         } else if (intent.getAction().equals("android.intent.action.MAIN")) {
             interactive = true;
         }
