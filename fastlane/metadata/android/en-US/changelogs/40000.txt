@@ -1,0 +1,4 @@
+* Adopt to Android 14 use
+* Upgrade source to use actual SDK (34) and Android Studio Koala 2024.1.1 Patch 1
+* Add fastlane for F-Droid
+* Set target SDK to 34 as Google Play Market required
