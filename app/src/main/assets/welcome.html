@@ -98,11 +98,13 @@
       document.getElementById("stat_encoding").innerHTML = describeSegments(segs);
       document.getElementById("statistics_frame").style.display = 'block';
     }
+    function showExample(element) {
+      qrtext.value=element.innerText;
+      redrawQR();
+    }
     </script>
-
 </head>
 <body>
-
     <!-- Main tab -->
 <div id="Main" class="tab" style="display:block">
 <div class="frame">
@@ -118,7 +120,6 @@
     <canvas id="qrcode-canvas" style="padding:1em; background-color:#E8E8E8" />
 </div>
 </div>
-
 <div
   class="frame"
   id="unattended"
@@ -138,7 +139,6 @@
     "
   />
 </div>
-
 <div class="frame" id="interactive" style="display:none">
 <form>
   <br />
@@ -282,17 +282,19 @@ Show advanced options
   </button>
 </form>
 </div>
-
-  <script type="text/javascript">
+<h4>Examples:</h4>
+<div class="frame" id="ex-mecard" onClick="showExample(this)">
+MECARD:N:Doe,John;TEL:800-555-5555;NICKNAME:JD;NOTE:Author of open source projects;EMAIL:jd@example.net;
+</div>
+See more information about MeCard (QR code) format <a href="https://en.wikipedia.org/wiki/MeCard_(QR_code)">here</a>
+<div class="frame" id="ex-wifi-ap" onClick="showExample(this)">
+WIFI:S:MyHome;T:WPA2;P:SweetHome;;
+</div>
+</div>
+<script type="text/javascript">
     // TODO: remove debug
-//    document.getElementById('interactive').style.display = 'block';
-
-//    redrawQR();
-
+    //document.getElementById('interactive').style.display = 'block';
+    //redrawQR();
   </script>
-
-        </div>
-
 </body>
-
 </html>
