@@ -31,7 +31,7 @@ try {
 }
 ```
 ### License
-This software licensed under [MIT license](LICENSE). Copyright (c) 2018 Mikhail Basov
+This software licensed under [MIT license](LICENSE). Copyright (c) 2018-2024 Mikhail Basov
 
 To create QR code this program uses [QR Code generator library](https://github.com/nayuki/QR-Code-generator) licensed under MIT license also. Copyright (c) 2017 Project Nayuki.
 
