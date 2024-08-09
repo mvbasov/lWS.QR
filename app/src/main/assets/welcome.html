@@ -13,15 +13,11 @@
       var text = document.getElementById('qrtext').value;
       var qrarea = document.getElementById('qrcode');
       if (text.length == 0) {
-        qrarea.style.width = '90%';
-        qrarea.style.margin = 'auto';
         qrarea.innerHTML = welcome;
         document.getElementById("statistics_frame").style.display = 'none';
         return;
       } else {
-        qrarea.style.width = '5%';
-        qrarea.style.margin = '0.1em auto 0.1em';
-        qrarea.innerHTML = "<canvas id=\"qrcode-canvas\" style=\"padding:1em; background-color:#E8E8E8\" />"
+        qrarea.innerHTML = "<canvas id=\"qrcode-canvas\" style=\"background-color:#E8E8E8\" />"
       }
       var segs = qrcodegen.QrSegment.makeSegments(text);
       var canvas = document.getElementById("qrcode-canvas");
@@ -101,23 +97,16 @@
     function showExample(element) {
       qrtext.value=element.innerText;
       redrawQR();
+      main.scrollTop = 0;
     }
     </script>
 </head>
 <body>
     <!-- Main tab -->
-<div id="Main" class="tab" style="display:block">
-<div class="frame">
-<div
-  id="qrcode"
-  style="
-    display:table;
-    width:5%;
-    margin: 0.1em auto 0.1em;
-  "
->
-
-    <canvas id="qrcode-canvas" style="padding:1em; background-color:#E8E8E8" />
+<div id="main" class="tab" style="display:block">
+<div class="frame" id="container">
+<div  id="qrcode">
+    <canvas id="qrcode-canvas" />
 </div>
 </div>
 <div
@@ -149,7 +138,7 @@
           border-radius: 7px;
       "
       placeholder="Enter text to encode here..."
-      rows="2"
+      rows="3"
       id="qrtext"
       onkeyup="
         redrawQR();
@@ -174,6 +163,7 @@ Encode
   >
 Clear
   </button>
+    <div class="frame" style="display:none" id="advanced">
     <div class="frame" style="display:none" id="statistics_frame">
       <table align="center">
         <tr>
@@ -192,9 +182,7 @@ Clear
           <td id="stat_encoding"></td>
         </tr>
       </table>
-
     </div>
-    <div class="frame" style="display:none" id="advanced">
     <div >
     <table align="center">
       <tr>
@@ -274,22 +262,33 @@ Min version [1-40]
       class="wbtn"              
       type="button"
       onClick="
-        var adv = document.getElementById('advanced');
-        adv.style.display = adv.style.display == 'none' ? 'block' : 'none';
-        document.getElementById('adv_btn').innerHTML= adv.style.display == 'none' ? 'Show advanced options' : 'Hide advanced options';"
+        advanced.style.display = advanced.style.display == 'none' ? 'block' : 'none';
+        adv_btn.innerHTML= adv.style.display == 'none' ? 'Show advanced options' : 'Hide advanced options';"
   >
 Show advanced options
   </button>
 </form>
 </div>
-<h4>Examples:</h4>
-<div class="frame" id="ex-mecard" onClick="showExample(this)">
-MECARD:N:Doe,John;TEL:800-555-5555;NICKNAME:JD;NOTE:Author of open source projects;EMAIL:jd@example.net;
-</div>
-See more information about MeCard (QR code) format <a href="https://en.wikipedia.org/wiki/MeCard_(QR_code)">here</a>
-<div class="frame" id="ex-wifi-ap" onClick="showExample(this)">
-WIFI:S:MyHome;T:WPA2;P:SweetHome;;
-</div>
+    <h4>Examples:</h4>
+    See good exampes <a href="https://renderform.io/docs/general/qr-codes/">collection</a>
+    <div class="frame example" id="ex-wifi-ap" onClick="showExample(this)">WIFI:S:a926kh777;T:WPA2;P:mvb12354;;</div>
+    <div class="frame example" id="ex-ical" onClick="showExample(this)">BEGIN:VEVENT
+        SUMMARY:My Event
+        DESCRIPTION:Description
+        LOCATION:Location
+        DTSTART:20211021T115429Z
+        END:VEVENT</div>
+    <div class="frame example" id="ex-mecard" onClick="showExample(this)">BEGIN:VCARD
+        VERSION:3.0
+        N:Lastname;Firstname
+        FN:Firstname Lastname
+        ORG:CompanyName
+        TITLE:JobTitle
+        ADR:;;123 Sesame St;SomeCity;CA;12345;USA
+        TEL;WORK;VOICE:1234567890
+        EMAIL;WORK;INTERNET:foo@email.com
+        URL:http://website.com
+        END:VCARD</div>
 </div>
 <script type="text/javascript">
     // TODO: remove debug
