@@ -26,7 +26,9 @@ android {
 
     }
 
+
     compileSdkVersion 34
+
 
     defaultConfig {
 // Keep two lines arround applicationId unchanged to allow use patch for F-Droid build
