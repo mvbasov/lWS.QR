@@ -37,4 +37,5 @@ To create QR code this program uses [QR Code generator library](https://github.c
 
 ### Acknowledgments
 * [Rodrigo I. Ávila D. aka Undigon](https://github.com/Undigon) for my ugly English correction.
+* [Amaryllis](https://github.com/946923759) for "Show shared text as QR Code" [pull request](https://github.com/mvbasov/lWS.QR/pull/3)
 

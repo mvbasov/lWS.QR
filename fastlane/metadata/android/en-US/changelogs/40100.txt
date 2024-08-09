@@ -3,3 +3,4 @@
 * Add fastlane for F-Droid
 * Set target SDK to 34 as Google Play Market required
 * Add QR code examples
+* Show shared text as QR Code (thanks to [Amaryllis](https://github.com/946923759) ) 

@@ -40,8 +40,8 @@ android {
 // End of strings reserved for F-Droid patch
         minSdkVersion 16
         targetSdkVersion 34
-        versionCode 40000
-        versionName "04.00.00"
+        versionCode 40100
+        versionName "04.01.00"
     }
 
     buildFeatures {
