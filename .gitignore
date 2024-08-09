@@ -1,6 +1,8 @@
 # Built application files
 build/
 app/apk/
+app/gpm/
+app/fdroid/
 lWS.QR_assets.*.tgz
 
 # Crashlytics configuations
@@ -9,6 +11,7 @@ lWS.QR_assets.*.tgz
 # Local configuration file (sdk path, etc)
 local.properties
 /*/local.properties
+gradle.properties
 
 # Gradle generated files
 .gradle/

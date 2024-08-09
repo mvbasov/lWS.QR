@@ -10,7 +10,7 @@ It can also be used by itself as a small and simple QR code generator.
 Start by entering text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
 To see this text again press 'Clear' button.
 lWS QR can be easily integrated with your application.
-Source code and aditional information available <a href=\"http://github.com/mvbasov/lWS.QR\">here</a>"
+Source code and aditional information is available <a href=\"http://github.com/mvbasov/lWS.QR\">here</a>"
     ]]></string>
 
 </resources>

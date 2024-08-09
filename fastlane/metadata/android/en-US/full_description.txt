@@ -1,9 +1,3 @@
-### lightweight Web Server QR code plugin.
-
-<a href="https://play.google.com/store/apps/details?id=net.basov.lws.qr.gpm"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80" alt="Available on Google Play" /></a>
-<a href="https://travis-ci.org/mvbasov/lWS.QR"><img src="https://travis-ci.org/mvbasov/lWS.QR.svg?branch=master" alt="Tavis CI Build Status" /></a>
-<a href="https://f-droid.org/en/packages/net.basov.lws.qr.fdroid/"><img src="https://f-droid.org/badge/get-it-on.png" height="80" alt="Available on F-Droid" /></a>
-
 This programm was designed as a QR Code plugin for the [lightweight Web Server (lWS)](https://github.com/mvbasov/lWS).
 It can also be used by itself as a small and simple QR code generator.
 Start by entering text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
@@ -22,7 +16,7 @@ try {
       i.putExtra("ENCODE_CORRECTION", "L"); //(optional, default: L) Error correction level [L,M,Q,H]
       i.putExtra("ENCODE_MODULE_SIZE", 6);//(optional, default 6) Small black square zize in pixels
       i.putExtra("ENCODE_MASK", -1);//(optional, default -1) QR code data mask 0-7 or -1 for autodetect
-      i.putExtra("ENCODE_MIN_VERSION", 1);//(optional, default 1) Force minimal QR code version (size)                         
+      i.putExtra("ENCODE_MIN_VERSION", 1);//(optional, default 1) Force minimal QR code version (size)
       startActivity(i);
 } catch (PackageManager.NameNotFoundException e_lws_qr) {
       Intent i = new Intent(Intent.ACTION_VIEW);

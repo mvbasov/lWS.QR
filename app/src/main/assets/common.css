@@ -54,4 +54,21 @@ div.frame {
     outline: none;
     border: 0px solid red;
 }
+#qrcode {
+  width: 96%;
+  padding: 2%;
+  margin: 0 auto;
+}
+#qrcode-canvas {
+  text-align: center;
+  display: block;
+  max-width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  background-color:#E8E8E8;
+  padding: 5%;
+}
+.example {
+  white-space: pre-line;
+}
 
