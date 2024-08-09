@@ -101,10 +101,15 @@ public class MainActivity extends Activity {
                 }
             }
         } else if (intent.getAction().equals("android.intent.action.SEND")) {
-            String str = intent.getStringExtra(Intent.EXTRA_TEXT);
+            String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+            String sharedSubject = intent.getStringExtra(Intent.EXTRA_SUBJECT);
             interactive = false;
-            txt = str;
-            label = str;
+            txt = sharedText;
+            if (sharedSubject != null) {
+                label = sharedSubject;
+            } else {
+                label = sharedText;
+            }
             corr = "L";
             modSize = 6;
             mask = -1;
