@@ -2,6 +2,7 @@ This programm was designed as a QR Code plugin for the [lightweight Web Server (
 It can also be used by itself as a small and simple QR code generator.
 Start by entering text in the text area below or paste it from clipboard and press 'Encode' button to see QR code.
 To see this text again press 'Clear' button.
+You can share text to this app to it as QR code.
 ### How to integrate with you application
 lWS QR can be easily integrated with your application. The following code explain how to do this:
 ```
